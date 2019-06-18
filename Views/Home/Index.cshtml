@@ -1,0 +1,85 @@
+﻿@using TesteApp.Controllers;
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjLznlyJB4dfkni3FUJF1N_sllNAbKmw4"></script>
+<script src="~/Scripts/markerwithlabel.js"></script>
+<script>
+    google.maps.event.addDomListener(window, 'load', initMap);
+    @(MvcHtmlString.Create("var currentLat =" + HomeController.Latitude.ToString(System.Globalization.CultureInfo.InvariantCulture) +";"))
+
+    @(MvcHtmlString.Create("var currentLng =" + HomeController.Longitude.ToString(System.Globalization.CultureInfo.InvariantCulture) +";"))
+    var marker;
+    Login();
+    $(document).keydown(function (e) {
+        switch (e.which) {
+            case 65: // left
+                marker.setPosition(new google.maps.LatLng(currentLat, currentLng - movSense));
+                currentLng = currentLng - movSense;
+                break;
+
+            case 87: // up
+                marker.setPosition(new google.maps.LatLng(currentLat + movSense, currentLng));
+                currentLat = currentLat + movSense;
+                break;
+
+            case 68: // right
+                marker.setPosition(new google.maps.LatLng(currentLat, currentLng + movSense));
+                currentLng = currentLng + movSense;
+                break;
+
+            case 83: // down
+                marker.setPosition(new google.maps.LatLng(currentLat - movSense, currentLng));
+                currentLat = currentLat - movSense;
+                break;
+
+            default: return; // exit this handler for other keys
+        }
+        e.preventDefault(); // prevent the default action (scroll / move caret)
+    });
+    GetInventory();
+    
+</script>
+
+<div class="row">
+    <div class="col-xs-8">
+        <div id="map" style="height:400px;width:100%;margin-top:20px;"></div>
+    </div>
+    <div class="col-xs-4">
+        <div id="GameWindow" style="display:none">
+            <div class="row">
+                <span>CP: </span>
+                <span id="PokeCP"></span>
+            </div>
+            <div class="row">
+                <img id="pokeimage" src=""/>
+            </div>
+            <div class="row" id="pokesection">
+                <img src="~/Content/Images/Items/ItemPokeBall.png" style="cursor:pointer"  onclick="CatchPokemon('ItemPokeBall')" />
+                <span id="pokeballnr"></span>
+            </div>
+            <div class="row" id="greatsection">
+                <img src="~/Content/Images/Items/ItemGreatBall.png" style="cursor:pointer" onclick="CatchPokemon('ItemGreatBall')" />
+                <span id="greatballnr"></span>
+            </div>
+            <div class="row" id="ultrasection">
+                <img src="~/Content/Images/Items/ItemUltraBall.png" style="cursor:pointer" onclick="CatchPokemon('ItemUltraBall')" />
+                <span id="ultraballnr"></span>
+            </div>
+            <div class="row" id="razzsection">
+                <img src="~/Content/Images/Items/ItemRazzBerry.png" style="cursor:pointer" onclick="UseBerry('ItemRazzBerry')" />
+                <span id="razzBerrynr"></span>
+            </div>
+        </div>
+        <div id="Log" style="height:400px;max-height:400px;overflow:scroll;"></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <div id="Nearby">
+
+        </div>
+    </div>
+</div>
+<div class="row">
+    <button class="btn success" id="ChangeModeButton" onclick="ChangeMode()">START WALKING BITCH</button>
+</div>
+
+

@@ -1,0 +1,93 @@
+﻿<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.12/datatables.min.css" />
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.12/datatables.min.js"></script>
+<div id="PlayerTab" class="container">
+    <ul class="nav nav-tabs">
+        <li class="active"  onclick="BuildItemsTable()">
+            <a href="#Inventory" data-toggle="tab">Inventory</a>
+        </li>
+        <li  onclick="BuildPokemonsTable(); BuildEggsTable();">
+            <a href="#Pokemons" data-toggle="tab">Pokemons</a>
+        </li>
+        <li  onclick="BuildPokeDex()">
+            <a href="#Pokedex" data-toggle="tab">Pokedex</a>
+        </li>
+        <li  onclick="BuildPlayerStats()">
+            <a href="#PlayerStats" data-toggle="tab">Player Stats</a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane active" id="Inventory">
+            <h3>Inventory</h3>
+                <table id="ItemsTable" class="display">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Count</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                </table>
+        </div>
+        <div class="tab-pane" id="Pokemons">
+            <h3>Pokemons</h3>
+                    <table id="PokemonsTable" class="display" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Number</th>
+                                <th>Name</th>
+                                <th>Date</th>
+                                <th>CP</th>
+                                <th>Candies</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                    </table>
+                    
+                    
+                    <table id="EggsTable" class="display">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Target</th>
+                                <th>Progress</th>
+                                <th>Incubator</th>
+                            </tr>
+                        </thead>
+                    </table>
+            
+        </div>
+        <div class="tab-pane" id="Pokedex">
+            
+        </div>
+        <div class="tab-pane" id="PlayerStats">
+            <h3>Player Stats</h3>
+            <div class="row">
+                <span>Player Level: </span><span id="PlayerLevel"></span>    
+            </div>
+            <div class="row">
+                <span>Next level:</span>
+                <div class="progress">
+                    <div class="progress-bar" id="expbar" role="progressbar" style="width:0%">
+                        <span class="sr-only">0%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <span>Kms walked</span>
+                <span id="kmswalked"></span>
+            </div>
+            <div class="row">
+                <button class="btn btn-success" onclick="GetLevelUpRewards()">GET LEVEL UP REWARDS</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    GetInventory();
+    BuildItemsTable(inventory);
+</script>
+
